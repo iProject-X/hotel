@@ -1,0 +1,19 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": false,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "std-559.ist.mospolytech.ru",
+  "port": "22",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+   "remote_path": "/home/std/",
+  "username": "std",
+  "password": "1514077q",
+  "watch": [],
+  "transport": "scp"
+}
