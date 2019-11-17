@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,11 +26,8 @@ SECRET_KEY = 'j1cw0!$92bdic2ju(7kt7&@w%(iihxydk%r7%%d24@d97c)h$t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['muxamedov.herokuapp.com']
-import dj_database_url
+ALLOWED_HOSTS = ['*']
 
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
 
 # Application definition
 
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'system.urls'
@@ -132,7 +133,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 
 ]
-
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage',
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
